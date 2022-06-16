@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KHS - AR</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/aframe/1.2.0/aframe.min.js"
+      integrity="sha512-/gO16YMp20RIqCZXZyvMlzALQqEoiDU0akshw25wFiXCRGl+0p/HPWkOd8HWFn6bnatGhxakGLfYhWaPPVQIyA=="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="js/deskripsi.js"></script>
+    <script src="js/controller.js"></script>
+  </head>
+  <body>
+    <a-scene embedded arjs>
+      <!-- MODEL -->
+      <a-asset>
+        <a-asset-item id="model1" src="model/lidah-buaya.gltf"></a-asset-item>
+        <a-asset-item id="model2" src="model/lemon.gltf"></a-asset-item>
+        <a-asset-item id="model3" src="model/melati.gltf"></a-asset-item>
+        <a-asset-item id="model4" src="model/dandelion.gltf"></a-asset-item>
+        <a-asset-item id="model5" src="model/blueberry.gltf"></a-asset-item>
+        <a-asset-item
+          id="human"
+          src="model/walking-animation.gltf"
+        ></a-asset-item>
+        <audio id="audio1" src="/audio/ALOE VERA.mp3"></audio>
+        <audio id="audio2" src="/audio/CITRUS LIMON.mp3"></audio>
+        <audio id="audio3" src="/audio/JASMINUM OFFICINALE.mp3"></audio>
+        <audio id="audio4" src="/audio/TARAXACUM OFFICINALE.mp3"></audio>
+        <audio id="audio5" src="/audio/VACCINIUM SPEC.mp3"></audio>
+      </a-asset>
+
+      <!-- MARKER -->
+      <a-marker
+        id="ar01"
+        type="pattern"
+        url="marker/pattern-aloe vera.patt"
+        smooth="true"
+      >
+        <a-entity
+          id="model-tanaman1"
+          gltf-model="#model1"
+          animation__satu="property:scale;from:0 0 0;to:1 1 1;dur:5000;easing:easeInQuad"
+          animation__putar="property:rotation;to:0 360 0;dur:10000;loop:true;easing:linear;startEvents:putar-objek;pauseEvents:pause-objek;resumeEvents:resume-objek"
+          animation__stop="property:rotation;to:0 0 0;dur:1000;easing:linear;startEvents:stop-objek"
+        ></a-entity>
+        <a-entity position="0 0 0.5" rotation="-90 0 0">
+          <a-gui-flex-container flex-direction="column" width="1" height="0.25">
+            <a-gui-label
+              value="Lidah Buaya"
+              font-size="0.1"
+              width="1"
+              height="0.125"
+              text-depth="0.05"
+              background-color="green"
+              font-color="#fff"
+              font-family="/fonts/Roboto-Bold.ttf"
+            ></a-gui-label>
+            <a-gui-label
+              value="Aloe Vera"
+              font-size="0.1"
+              text-depth="0.05"
+              width="1"
+              height="0.125"
+              background-color="green"
+              font-color="#fff"
+              font-family="/fonts/Roboto-BoldItalic.ttf"
+            ></a-gui-label>
+          </a-gui-flex-container>
+        </a-entity>
+        <a-entity position="0 0 0.95" rotation="-90 0 0">
+          <a-gui-flex-container flex-direction="row" width="1" height="0.78">
+            <a-gui-button
+              id="read1"
+              value="READ"
+              width="0.5"
+              height="0.4"
+              base-depth="0.025"
+              depth="0.1"
+              gap="0.1"
+              font-size="0.1"
+              font-family="/fonts/Roboto-Bold.ttf"
+              background-color="#fff"
+              border-color="green"
+              font-color="green"
+              hover-color="#333"
+              onclick="showDesc1()"
+            ></a-gui-button>
+            <a-gui-button
+              id="play1"
+              value="PLAY"
+              width="0.5"
+              height="0.4"
+              base-depth="0.025"
+              depth="0.1"
+              gap="0.1"
+              font-size="0.1"
+              font-family="/fonts/Roboto-Bold.ttf"
+              background-color="#fff"
+              border-color="green"
+              font-color="green"
+              hover-color="#333"
+              onclick="playDesc1()"
+            ></a-gui-button>
+          </a-gui-flex-container>
+        </a-entity>
+        <a-entity
+          id="stop1"
+          position="0 0 1.5"
+          rotation="-90 0 0"
+          visible="false"
+        >
+          <a-gui-flex-container
+            flex-direction="row"
+            width="1"
+            height="0.78"
+            opacity="1"
+            panel-color="green"
+          >
+            <a-gui-button
+              value="STOP"
+              width="1"
+              height="0.4"
+              base-depth="0.025"
+              depth="0.1"
+              gap="0.1"
+              font-size="0.1"
+              font-family="/fonts/Roboto-Bold.ttf"
+              background-color="#fff"
+              border-color="green"
+              font-color="green"
+              hover-color="#333"
+              onclick="stopDesc1()"
+            ></a-gui-button>
+          </a-gui-flex-container>
+        </a-entity>
+        <a-entity
+          id="desc1"
+          position="1.125 0 0.75"
+          rotation="-90 0 0"
+          visible="false"
+          animation__satu="property:position;to:1.125 0 0;startEvents:move-up"
+          animation__dua="property:position;to:1.125 0 0.75;startEvents:move-down"
+        >
+          <a-gui-flex-container width="1" height="2" flex-direction="column">
+            <a-gui-label
+              id="manfaat"
+              width="0.9"
+              height="2"
+              font-size="0.09"
+              font-family="/fonts/Roboto-Bold.ttf"
+              font-color="green"
+              background-color="white"
+              text-depth="0.05"
+              line-height="1"
+              letter-spacing="0"
+              margin="0.1 0.5 0.1 0.1"
+              align="left"
+              value=""
+            ></a-gui-label>
+          </a-gui-flex-container>
+        </a-entity>
+        <a-entity
+          id="host1"
+          gltf-model="#human"
+          scale="0.005 0.005 0.005"
+          position="-0.75 0 -1.25"
+          sound="src: #audio1;autoplay:false;volume:5"
+          visible="false"
+        ></a-entity>
+      </a-marker>
+      <a-marker
+        id="ar02"
+        type="pattern"
+        url="marker/pattern-Citrus limon.patt"
+        smooth="true"
+      >
+        <a-entity
+          id="model-tanaman2"
+          gltf-model="#model2"
+          animation__satu="property:scale;from:0 0 0;to:1 1 1;dur:5000;easing:easeInQuad"
+          animation__putar="property:rotation;to:0 360 0;dur:10000;loop:true;easing:linear;startEvents:putar-objek;pauseEvents:pause-objek;resumeEvents:resume-objek"
+          animation__stop="property:rotation;to:0 0 0;dur:1000;easing:linear;startEvents:stop-objek"
+        ></a-entity>
+        <a-entity position="0 0 0.5" rotation="-90 0 0">
+          <a-gui-flex-container flex-direction="column" width="1" height="0.25">
+            <a-gui-label
+              value="Lemon"
+              font-size="0.1"
+              width="1"
+              height="0.125"
+              text-depth="0.05"
+              background-color="green"
+              font-color="#fff"
+              font-family="/fonts/Roboto-Bold.ttf"
+            ></a-gui-label>
+            <a-gui-label
+              value="Citrus Limon"
+              font-size="0.1"
+              width="1"
+              height="0.125"
+              text-depth="0.05"
+              background-color="green"
+              font-color="#fff"
+              font-family="/fonts/Roboto-BoldItalic.ttf"
+            ></a-gui-label>
+          </a-gui-flex-container>
+        </a-entity>
+        <a-entity position="0 0 0.95" rotation="-90 0 0">
+          <a-gui-flex-container flex-direction="row" width="1" height="0.78">
+            <a-gui-button
+              id="read2"
+              value="READ"
+              width="0.5"
+              height="0.4"
+              base-depth="0.025"
+              depth="0.1"
+              gap="0.1"
+              font-size="0.1"
+              font-family="/fonts/Roboto-Bold.ttf"
+              background-color="#fff"
+              border-color="green"
+              font-color="green"
+              hover-color="#333"
+              onclick="showDesc2()"
+            ></a-gui-button>
+            <a-gui-button
+              id="play2"
+              value="PLAY"
+              width="0.5"
+              height="0.4"
+              base-depth="0.025"
+              depth="0.1"
+              gap="0.1"
+              font-size="0.1"
+              font-family="/fonts/Roboto-Bold.ttf"
+              background-color="#fff"
+              border-color="green"
+              font-color="green"
+              hover-color="#333"
+              onclick="playDesc2()"
+            ></a-gui-button>
+          </a-gui-flex-container>
+        </a-entity>
+        <a-entity
+          id="stop2"
+          position="0 0 1.5"
+          rotation="-90 0 0"
+          visible="false"
+        >
+          <a-gui-flex-container
+            flex-direction="row"
+            width="1"
+            height="0.78"
+            opacity="1"
+            panel-color="green"
+          >
+            <a-gui-button
+              value="STOP"
+              width="1"
+              height="0.4"
+              base-depth="0.025"
+              depth="0.1"
+              gap="0.1"
+              font-size="0.1"
+              font-family="/fonts/Roboto-Bold.ttf"
+              background-color="#fff"
+              border-color="green"
+              font-color="green"
+              hover-color="#333"
+              onclick="stopDesc2()"
+            ></a-gui-button>
+          </a-gui-flex-container>
+        </a-entity>
+        <a-entity
+          id="desc2"
+          position="1.25 0 1"
+          rotation="-90 0 0"
+          visible="false"
+          animation__satu="property:position;to:1.25 0 0;startEvents:move-up"
+          animation__dua="property:position;to:1.25 0 1;startEvents:move-down"
+        >
+          <a-gui-flex-container width="1" height="2" flex-direction="column">
+            <a-gui-label
+              id="manfaat"
+              width="0.9"
+              height="2"
+              font-size="0.09"
+              font-family="/fonts/Roboto-Bold.ttf"
+              font-color="green"
+              background-color="white"
+              text-depth="0.05"
+              line-height="1"
+              letter-spacing="0"
+              margin="0.1 0.5 0.1 0.1"
+              align="left"
+              value=""
+            ></a-gui-label>
+          </a-gui-flex-container>
+        </a-entity>
+        <a-entity
+          id="host2"
+          gltf-model="#human"
+          scale="0.005 0.005 0.005"
+          position="-0.75 0 -1.25"
+          sound="src: #audio2;autoplay:false;volume:5"
+          visible="false"
+        ></a-entity>
+      </a-marker>
+      <a-marker
+        id="ar03"
+        type="pattern"
+        url="marker/pattern-Jasminum Officinale.patt"
+        smooth="true"
+      >
+        <a-entity
+          id="model-tanaman3"
+          gltf-model="#model3"
+          animation__satu="property:scale;from:0 0 0;to:1 1 1;dur:5000;easing:easeInQuad"
+          animation__putar="property:rotation;to:0 360 0;dur:10000;loop:true;easing:linear;startEvents:putar-objek;pauseEvents:pause-objek;resumeEvents:resume-objek"
+          animation__stop="property:rotation;to:0 0 0;dur:1000;easing:linear;startEvents:stop-objek"
+        ></a-entity>
+        <a-entity position="0 0 0.5" rotation="-90 0 0">
+          <a-gui-flex-container flex-direction="column" width="1" height="0.25">
+            <a-gui-label
+              value="Melati"
+              font-size="0.1"
+              width="1"
+              height="0.125"
+              text-depth="0.05"
+              background-color="green"
+              font-color="#fff"
+              font-family="/fonts/Roboto-Bold.ttf"
+            ></a-gui-label>
+            <a-gui-label
+              value="Jasminum Officinale"
+              font-size="0.1"
+              width="1"
+              height="0.125"
+              text-depth="0.05"
+              background-color="green"
+              font-color="#fff"
+              font-family="/fonts/Roboto-BoldItalic.ttf"
+            ></a-gui-label>
+          </a-gui-flex-container>
+        </a-entity>
+        <a-entity position="0 0 0.95" rotation="-90 0 0">
+          <a-gui-flex-container flex-direction="row" width="1" height="0.78">
+            <a-gui-button
+              id="read3"
+              value="READ"
+              width="0.5"
+              height="0.4"
+              base-depth="0.025"
+              depth="0.1"
+              gap="0.1"
+              font-size="0.1"
+              font-family="/fonts/Roboto-Bold.ttf"
+              background-color="#fff"
+              border-color="green"
+              font-color="green"
+              hover-color="#333"
+              onclick="showDesc3()"
+            ></a-gui-button>
+            <a-gui-button
+              id="play3"
+              value="PLAY"
+              width="0.5"
+              height="0.4"
+              base-depth="0.025"
+              depth="0.1"
+              gap="0.1"
+              font-size="0.1"
+              font-family="/fonts/Roboto-Bold.ttf"
+              background-color="#fff"
+              border-color="green"
+              font-color="green"
+              hover-color="#333"
+              onclick="playDesc3()"
+            ></a-gui-button>
+          </a-gui-flex-container>
+        </a-entity>
+        <a-entity
+          id="stop3"
+          position="0 0 1.5"
+          rotation="-90 0 0"
+          visible="false"
+        >
+          <a-gui-flex-container
+            flex-direction="row"
+            width="1"
+            height="0.78"
+            opacity="1"
+            panel-color="green"
+          >
+            <a-gui-button
+              value="STOP"
+              width="1"
+              height="0.4"
+              base-depth="0.025"
+              depth="0.1"
+              gap="0.1"
+              font-size="0.1"
+              font-family="/fonts/Roboto-Bold.ttf"
+              background-color="#fff"
+              border-color="green"
+              font-color="green"
+              hover-color="#333"
+              onclick="stopDesc3()"
+            ></a-gui-button>
+          </a-gui-flex-container>
+        </a-entity>
+        <a-entity
+          id="desc3"
+          position="1.25 0 1"
+          rotation="-90 0 0"
+          visible="false"
+          animation__satu="property:position;to:1.25 0 0;startEvents:move-up"
+          animation__dua="property:position;to:1.25 0 1;startEvents:move-down"
+        >
+          <a-gui-flex-container width="1" height="2" flex-direction="column">
+            <a-gui-label
+              id="manfaat"
+              width="0.9"
+              height="2"
+              font-size="0.09"
+              font-family="/fonts/Roboto-Bold.ttf"
+              font-color="green"
+              background-color="white"
+              text-depth="0.05"
+              line-height="1"
+              letter-spacing="0"
+              margin="0.1 0.5 0.1 0.1"
+              align="left"
+              value=""
+            ></a-gui-label>
+          </a-gui-flex-container>
+        </a-entity>
+        <a-entity
+          id="host3"
+          gltf-model="#human"
+          scale="0.005 0.005 0.005"
+          position="-0.75 0 -1.25"
+          sound="src: #audio3;autoplay:false;volume:5"
+          visible="false"
+        ></a-entity>
+      </a-marker>
+      <a-marker
+        id="ar04"
+        type="pattern"
+        url="marker/pattern-Taraxacum officinale.patt"
+        smooth="true"
+      >
+        <a-entity
+          id="model-tanaman4"
+          gltf-model="#model4"
+          animation__satu="property:scale;from:0 0 0;to:1 1 1;dur:5000;easing:easeInQuad"
+          animation__putar="property:rotation;to:0 360 0;dur:10000;loop:true;easing:linear;startEvents:putar-objek;pauseEvents:pause-objek;resumeEvents:resume-objek"
+          animation__stop="property:rotation;to:0 0 0;dur:1000;easing:linear;startEvents:stop-objek"
+        ></a-entity>
+        <a-entity position="0 0 0.5" rotation="-90 0 0">
+          <a-gui-flex-container flex-direction="column" width="1" height="0.25">
+            <a-gui-label
+              value="Dandelion"
+              font-size="0.1"
+              width="1"
+              height="0.125"
+              text-depth="0.05"
+              background-color="green"
+              font-color="#fff"
+              font-family="/fonts/Roboto-Bold.ttf"
+            ></a-gui-label>
+            <a-gui-label
+              value="Taraxacum Officinale"
+              font-size="0.1"
+              width="1"
+              height="0.125"
+              text-depth="0.05"
+              background-color="green"
+              font-color="#fff"
+              font-family="/fonts/Roboto-BoldItalic.ttf"
+            ></a-gui-label>
+          </a-gui-flex-container>
+        </a-entity>
+        <a-entity position="0 0 0.95" rotation="-90 0 0">
+          <a-gui-flex-container flex-direction="row" width="1" height="0.78">
+            <a-gui-button
+              id="read4"
+              value="READ"
+              width="0.5"
+              height="0.4"
+              base-depth="0.025"
+              depth="0.1"
+              gap="0.1"
+              font-size="0.1"
+              font-family="/fonts/Roboto-Bold.ttf"
+              background-color="#fff"
+              border-color="green"
+              font-color="green"
+              hover-color="#333"
+              onclick="showDesc4()"
+            ></a-gui-button>
+            <a-gui-button
+              id="play4"
+              value="PLAY"
+              width="0.5"
+              height="0.4"
+              base-depth="0.025"
+              depth="0.1"
+              gap="0.1"
+              font-size="0.1"
+              font-family="/fonts/Roboto-Bold.ttf"
+              background-color="#fff"
+              border-color="green"
+              font-color="green"
+              hover-color="#333"
+              onclick="playDesc4()"
+            ></a-gui-button>
+          </a-gui-flex-container>
+        </a-entity>
+        <a-entity
+          id="stop4"
+          position="0 0 1.5"
+          rotation="-90 0 0"
+          visible="false"
+        >
+          <a-gui-flex-container
+            flex-direction="row"
+            width="1"
+            height="0.78"
+            opacity="1"
+            panel-color="green"
+          >
+            <a-gui-button
+              value="STOP"
+              width="1"
+              height="0.4"
+              base-depth="0.025"
+              depth="0.1"
+              gap="0.1"
+              font-size="0.1"
+              font-family="/fonts/Roboto-Bold.ttf"
+              background-color="#fff"
+              border-color="green"
+              font-color="green"
+              hover-color="#333"
+              onclick="stopDesc4()"
+            ></a-gui-button>
+          </a-gui-flex-container>
+        </a-entity>
+        <a-entity
+          id="desc4"
+          position="1.25 0 1"
+          rotation="-90 0 0"
+          visible="false"
+          animation__satu="property:position;to:1.25 0 0;startEvents:move-up"
+          animation__dua="property:position;to:1.25 0 1;startEvents:move-down"
+        >
+          <a-gui-flex-container width="1" height="2" flex-direction="column">
+            <a-gui-label
+              id="manfaat"
+              width="0.9"
+              height="2"
+              font-size="0.09"
+              font-family="/fonts/Roboto-Bold.ttf"
+              font-color="green"
+              background-color="white"
+              text-depth="0.05"
+              line-height="1"
+              letter-spacing="0"
+              margin="0.1 0.5 0.1 0.1"
+              align="left"
+              value=""
+            ></a-gui-label>
+          </a-gui-flex-container>
+        </a-entity>
+        <a-entity
+          id="host4"
+          gltf-model="#human"
+          scale="0.005 0.005 0.005"
+          position="-0.75 0 -1.25"
+          sound="src: #audio4;autoplay:false;volume:5"
+          visible="false"
+        ></a-entity>
+      </a-marker>
+      <a-marker
+        id="ar05"
+        type="pattern"
+        url="marker/pattern-Vaccinium spec.patt"
+        smooth="true"
+      >
+        <a-entity
+          id="model-tanaman5"
+          gltf-model="#model5"
+          animation__satu="property:scale;from:0 0 0;to:7 7 7;dur:5000;easing:easeInQuad"
+          animation__putar="property:rotation;to:0 360 0;dur:10000;loop:true;easing:linear;startEvents:putar-objek;pauseEvents:pause-objek;resumeEvents:resume-objek"
+          animation__stop="property:rotation;to:0 0 0;dur:1000;easing:linear;startEvents:stop-objek"
+        ></a-entity>
+        <a-entity position="0 0 0.5" rotation="-90 0 0">
+          <a-gui-flex-container flex-direction="column" width="1" height="0.25">
+            <a-gui-label
+              value="Blueberry"
+              font-size="0.1"
+              width="1"
+              height="0.125"
+              text-depth="0.05"
+              background-color="green"
+              font-color="#fff"
+              font-family="/fonts/Roboto-Bold.ttf"
+            ></a-gui-label>
+            <a-gui-label
+              value="Vaccinium Spec"
+              font-size="0.1"
+              width="1"
+              height="0.125"
+              text-depth="0.05"
+              background-color="green"
+              font-color="#fff"
+              font-family="/fonts/Roboto-BoldItalic.ttf"
+            ></a-gui-label>
+          </a-gui-flex-container>
+        </a-entity>
+        <a-entity position="0 0 0.95" rotation="-90 0 0">
+          <a-gui-flex-container flex-direction="row" width="1" height="0.78">
+            <a-gui-button
+              id="read5"
+              value="READ"
+              width="0.5"
+              height="0.4"
+              base-depth="0.025"
+              depth="0.1"
+              gap="0.1"
+              font-size="0.1"
+              font-family="/fonts/Roboto-Bold.ttf"
+              background-color="#fff"
+              border-color="green"
+              font-color="green"
+              hover-color="#333"
+              onclick="showDesc5()"
+            ></a-gui-button>
+            <a-gui-button
+              id="play5"
+              value="PLAY"
+              width="0.5"
+              height="0.4"
+              base-depth="0.025"
+              depth="0.1"
+              gap="0.1"
+              font-size="0.1"
+              font-family="/fonts/Roboto-Bold.ttf"
+              background-color="#fff"
+              border-color="green"
+              font-color="green"
+              hover-color="#333"
+              onclick="playDesc5()"
+            ></a-gui-button>
+          </a-gui-flex-container>
+        </a-entity>
+        <a-entity
+          id="stop5"
+          position="0 0 1.5"
+          rotation="-90 0 0"
+          visible="false"
+        >
+          <a-gui-flex-container
+            flex-direction="row"
+            width="1"
+            height="0.78"
+            opacity="1"
+            panel-color="green"
+          >
+            <a-gui-button
+              value="STOP"
+              width="1"
+              height="0.4"
+              base-depth="0.025"
+              depth="0.1"
+              gap="0.1"
+              font-size="0.1"
+              font-family="/fonts/Roboto-Bold.ttf"
+              background-color="#fff"
+              border-color="green"
+              font-color="green"
+              hover-color="#333"
+              onclick="stopDesc5()"
+            ></a-gui-button>
+          </a-gui-flex-container>
+        </a-entity>
+        <a-entity
+          id="desc5"
+          position="1.25 0 1"
+          rotation="-90 0 0"
+          visible="false"
+          animation__satu="property:position;to:1.25 0 0;startEvents:move-up"
+          animation__dua="property:position;to:1.25 0 1;startEvents:move-down"
+        >
+          <a-gui-flex-container width="1" height="2" flex-direction="column">
+            <a-gui-label
+              id="manfaat"
+              width="0.9"
+              height="2"
+              font-size="0.09"
+              font-family="/fonts/Roboto-Bold.ttf"
+              font-color="green"
+              background-color="white"
+              text-depth="0.05"
+              line-height="1"
+              letter-spacing="0"
+              margin="0.1 0.5 0.1 0.1"
+              align="left"
+              value=""
+            ></a-gui-label>
+          </a-gui-flex-container>
+        </a-entity>
+        <a-entity
+          id="host5"
+          gltf-model="#human"
+          scale="0.005 0.005 0.005"
+          position="-0.75 0 -1.25"
+          sound="src: #audio5;autoplay:false;volume:5"
+          visible="false"
+        ></a-entity>
+      </a-marker>
+
+      <!-- KAMERA -->
+      <a-entity camera id="cam">
+        <a-gui-cursor
+          design="dot"
+          raycast="objects:[gui-interactable]"
+        ></a-gui-cursor>
+      </a-entity>
+    </a-scene>
+  </body>
+</html>

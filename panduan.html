@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.css"
+      integrity="sha512-1hsteeq9xTM5CX6NsXiJu3Y/g+tj+IIwtZMtTisemEv3hx+S9ngaW4nryrNcPM4xGzINcKbwUJtojslX2KG+DQ=="
+      crossorigin="anonymous"
+    />
+    <title>KHS - AR</title>
+  </head>
+  <body>
+    <!-- NAVIGASI -->
+    <nav class="navbar">
+      <div class="navbar-container">
+        <ul class="navbar-nav-left">
+          <li>
+            <a href="index.html"><i class="fa-solid fa-house"></i></a>
+          </li>
+          <li>PANDUAN</li>
+        </ul>
+
+        <ul class="navbar-nav-right">
+          <li><a href="scan-ar.html">Scan Marker</a></li>
+          <li class="active">Guide</li>
+          <li><a href="pendukung.html">Support</a></li>
+        </ul>
+
+        <!-- Hamburger Menu -->
+        <button type="button" class="hamburger" id="menu-btn">
+          <span class="hamburger-top"></span>
+          <span class="hamburger-middle"></span>
+          <span class="hamburger-bottom"></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu hidden" id="menu">
+      <ul>
+        <li><a href="scan-ar.html">Scan Marker</a></li>
+        <li><a href="panduan.html">Guide</a></li>
+        <li><a href="pendukung.html">Support</a></li>
+      </ul>
+    </div>
+
+    <!-- BOX -->
+    <section class="box box-a bg-primary grid-col-2">
+      <h1 class="head text-center">1</h1>
+      <div class="box-text">
+        <h2 class="text-xl text-center">
+          Pastikan perangkat anda mendukung Augmented Reality
+        </h2>
+      </div>
+    </section>
+    <section class="box box-b bg-second grid-col-2 grid-reversed">
+      <h1 class="head text-center">2</h1>
+      <div class="box-text">
+        <h2 class="text-xl text-center">
+          Pilih tombol izinkan ketika mendapat notifikasi tentang kamera
+        </h2>
+      </div>
+    </section>
+    <section class="box box-c bg-primary grid-col-2">
+      <h1 class="head text-center">3</h1>
+      <div class="box-text">
+        <h2 class="text-xl text-center">
+          Arahkan kamera menuju Marker yang telah ditentukan
+        </h2>
+      </div>
+    </section>
+    <section class="box box-d bg-second grid-col-2 grid-reversed">
+      <h1 class="head text-center">4</h1>
+      <div class="box-text">
+        <h2 class="text-xl text-center">
+          Setelah Objek 3D tampil, tekan tombol Play untuk menampilkan animasi
+          beserta suaranya. tekan tombol Read More apabila ingin berupa teks.
+        </h2>
+      </div>
+    </section>
+    <div class="divider"></div>
+    <button type="button" id="btn-back-to-top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="social">
+          <a href="https://spotify.com">
+            <img src="image/social-spotify.svg" alt="" />
+          </a>
+          <a href="https://facebook.com">
+            <img src="image/social-facebook.svg" alt="" />
+          </a>
+          <a href="https://pinterest.com">
+            <img src="image/social-pinterest.svg" alt="" />
+          </a>
+          <a href="https://instagram.com">
+            <img src="image/social-instagram.svg" alt="" />
+          </a>
+          <a href="https://youtube.com">
+            <img src="image/social-youtube.svg" alt="" />
+          </a>
+          <a href="https://twitter.com">
+            <img src="image/social-twitter.svg" alt="" />
+          </a>
+        </div>
+        <p>© 2022 KHS Augmented Reality. All rights reserved.</p>
+      </div>
+    </footer>
+    <script src="js/index.js"></script>
+  </body>
+</html>
