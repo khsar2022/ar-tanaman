@@ -220,6 +220,49 @@ img {
   border: 1px solid var(--warna-hijau);
 }
 
+/* DESC CARD */
+.desc-title h1 {
+  text-transform: uppercase;
+}
+
+.desc-content {
+  margin-top: 2rem;
+  background-color: var(--warna-hijau);
+  display: flex;
+}
+
+.card1,
+.card2,
+.card3,
+.card4,
+.card5 {
+  margin: 2rem;
+  height: 25rem;
+  width: 20%;
+  background-color: #fff;
+}
+
+.gbr-tanaman {
+  height: 80%;
+  object-fit: cover;
+  object-position: bottom;
+}
+
+.label-tanaman {
+  background-color: #fff;
+  height: 20%;
+  color: var(--warna-hijau);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.label-tanaman h1 {
+  font-size: 1.5rem;
+  font-family: 'Fira sans';
+  font-style: italic;
+}
+
 /* Mobile Menu */
 .mobile-menu {
   position: fixed;
@@ -337,6 +380,27 @@ img {
 
   .hero-desc a {
     width: 100%;
+  }
+
+  .desc-content {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .card1,
+  .card2,
+  .card3,
+  .card4,
+  .card5 {
+    margin: 1rem auto;
+    width: 80%;
+    background-color: #fff;
+  }
+
+  .gbr-tanaman {
+    width: 100%;
+    object-fit: cover;
+    object-position: bottom;
   }
 
   .slide-img {
@@ -508,6 +572,7 @@ img {
   color: #fff;
 }
 
+
 /* Backgrounds */
 .bg-primary {
   background-color: chartreuse;
@@ -526,6 +591,11 @@ img {
 .bg-light {
   background: #fff;
   color: #000;
+}
+
+.bg-dark {
+  color: #fff;
+  background: #000;
 }
 
 /* Text Styling */
